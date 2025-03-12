@@ -5,7 +5,17 @@ const DB = require('./MySQL')
 app.use(express.json())
 DB.con
 
-
+app.get('/user', (req, res) => {
+    //select all users
+    const selectUserSql = `SELECT * FROM users`;
+    DB.con.query(selectUserSql, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
 
 
 app.post('/user', (req, res) => {
